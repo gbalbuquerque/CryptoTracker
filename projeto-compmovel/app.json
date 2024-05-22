@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "projeto-compmovel",
-    "slug": "snack-a48cd049-403f-4f57-abbd-6b473fca6698",
+    "slug": "snack-6a696ac9-66ec-42d8-b923-7892b5f62e39",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,9 +11,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
       "supportsTablet": true
     },

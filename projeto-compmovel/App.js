@@ -108,7 +108,7 @@ class Cadastro extends React.Component {
   render() {
     return (
       <View style={estilos.container}>
-        <Text style={estilos.titulo}>{'Crypto Tracker'}</Text>
+        <Text style={estilos.titulo}>{'CryptoTracker'}</Text>
         <Image style= {estilos.imagem} source = {require('./assets/bitcoin.png')}></Image>
         <Text style={estilos.texto}>{"Cadastrar Usuário:"}</Text>
         <TextInput 
@@ -169,7 +169,7 @@ class Principal extends React.Component {
   render() {
     return (
       <View style={estilos.container}>
-        <Text style={estilos.titulo}>{'Crypto Tracker'}</Text>
+        <Text style={estilos.titulo}>{'CryptoTracker'}</Text>
         <Image style = {estilos.imagem}source = {require('./assets/bitcoin.png')}></Image>
         <Text style={estilos.texto}>{"Usuário:"}</Text>
         <TextInput 
@@ -198,7 +198,7 @@ class Principal extends React.Component {
 
 const estilos = StyleSheet.create({
   container: {
-    backgroundColor: '#262626',
+    backgroundColor: '#141414',
     flex: 1,
     justifyContent: 'center',
     paddingTop: 0, 

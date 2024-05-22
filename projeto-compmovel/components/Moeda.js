@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
-const CoinItem = ({ coin }) => (
+const Moeda = ({ coin }) => (
   <View style={styles.containerItem}>
     <View style={styles.coinName}>
       <Image source={{ uri: coin.image }} style={styles.image} />
@@ -40,20 +40,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   text: {
-    color: "#fff",
+    color: "white",
   },
   textPrice: {
-    color: "#fff",
+    color: "white",
     fontWeight: "bold",
   },
   pricePercentage: {
     textAlign: "right",
   },
   priceUp: {
-    color: "#00B589",
+    color: "green",
   },
   priceDown: {
-    color: "#fc4422",
+    color: "red",
   },
   image: {
     width: 30,
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CoinItem;
+export default Moeda;
