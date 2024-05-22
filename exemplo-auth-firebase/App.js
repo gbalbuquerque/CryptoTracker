@@ -1,88 +1,89 @@
 import * as React from 'react';
-import { Text,View,Button, TextInput, Alert, StyleSheet,TouchableOpacity,Image } from 'react-native';
+import { Text, View, TextInput, Alert, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
-import PaginaLogado from './components/PaginaLogado'
-import firebase from './config/config'
+import PaginaLogado from './components/PaginaLogado';
+import firebase from './config/config';
 
 const Navegacao1 = createBottomTabNavigator();
 
+const Navegacao2 = createStackNavigator();
 
 export default class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Navegacao2.Navigator >
-          <Navegacao2.Screen name="Login" component={NavTab} 
+        <Navegacao2.Navigator>
+          <Navegacao2.Screen 
+            name="Login" 
+            component={NavTab} 
             options={{
               headerShown: false,
-              
-            }}
-            />
-          <Navegacao2.Screen name="PaginaLogado" component={PaginaLogado} 
-          options={{
-              headerShown: false 
-            }}
+            }} 
           />
-       </Navegacao2.Navigator>
+          <Navegacao2.Screen 
+            name="PaginaLogado" 
+            component={PaginaLogado} 
+            options={{
+              headerShown: false,
+            }} 
+          />
+        </Navegacao2.Navigator>
       </NavigationContainer>
     );
   }
 }
 
-const Navegacao2 = createStackNavigator();
-
 class NavTab extends React.Component {
   render() {
     return (
-        <Navegacao1.Navigator screenOptions={{ headerShown: false }} >
-          <Navegacao1.Screen
-            name="Login"
-            component={Principal} //o componente é a próxima estrutura de navegação
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="home" color={color} size={size} />
-              ), 
-              //tabBarStyle: { display: 'none' }
-            }}
-          />
-          <Navegacao1.Screen
-            name="Cadastro"
-            component={Cadastro}
-            options={{
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons
-                  name="account-details"
-                  color={color}
-                  size={size}
-                />
-              )
-            }}
-          />
-        </Navegacao1.Navigator>
+      <Navegacao1.Navigator screenOptions={{ headerShown: false }}>
+        <Navegacao1.Screen
+          name="Login"
+          component={Principal}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+            tabBarStyle: { display: 'none' }, // Esconder a barra de navegação inferior
+          }}
+        />
+        <Navegacao1.Screen
+          name="Cadastro"
+          component={Cadastro}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="account-details"
+                color={color}
+                size={size}
+              />
+            ),
+            tabBarStyle: { display: 'none' }, // Esconder a barra de navegação inferior
+          }}
+        />
+      </Navegacao1.Navigator>
     );
   }
 }
 
-class Cadastro extends React.Component{
-  constructor(props){
+class Cadastro extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       user: undefined,
       password: undefined,
-
-    }
-
+    };
   }
 
-  gravar(){
+  gravar() {
     const email = this.state.user.toLowerCase();
     const password = this.state.password.toLowerCase();
 
     firebase.auth()
-   .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then(() => {
         alert('Usuário cadastrado com sucesso!');
       })
@@ -104,59 +105,45 @@ class Cadastro extends React.Component{
       });
   }
 
-  render(){
-    return(
-     
-    <View style = {estilos.container}>
-      <Text style ={estilos.titulo}>{'Crypto Tracker'}</Text>
-      <Text style={estilos.texto}>{"Cadastrar Usuário:"}</Text>
-      <TextInput style={estilos.input} onChangeText={(texto)=>this.setState({user: texto})}></TextInput>
-      <Text style={estilos.texto}>{"Cadastrar Senha:"}</Text>
-      <TextInput style={estilos.input} onChangeText={(texto)=>this.setState({password: texto})}></TextInput>
-      <TouchableOpacity style = {estilos.botao} title="Logar" onPress={()=>this.ler()}>
-        <Text> {'Cadastrar'}</Text>
-      </TouchableOpacity>
-      
-    </View>
-    
-    )
+  render() {
+    return (
+      <View style={estilos.container}>
+        <Text style={estilos.titulo}>{'Crypto Tracker'}</Text>
+        <Image style= {estilos.imagem} source = {require('./assets/bitcoin.png')}></Image>
+        <Text style={estilos.texto}>{"Cadastrar Usuário:"}</Text>
+        <TextInput 
+          style={estilos.input} 
+          onChangeText={(texto) => this.setState({ user: texto })} 
+        />
+        <Text style={estilos.texto}>{"Cadastrar Senha:"}</Text>
+        <TextInput 
+          style={estilos.input} 
+          secureTextEntry={true} 
+          onChangeText={(texto) => this.setState({ password: texto })} 
+        />
+        <TouchableOpacity style={estilos.botao} onPress={() => this.gravar()}>
+          <Text>{'Cadastrar'}</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 }
 
-class Principal extends React.Component{
-  constructor(props){
-    super(props)
+class Principal extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       usuario: undefined,
-      senha: undefined
-    }
+      senha: undefined,
+    };
   }
 
-  render(){
-    return(
-    <View style = {estilos.container}>
-      <Image>  </Image>
-      <Text style={estilos.texto} >{"Usuário:"}</Text>
-      <TextInput style={estilos.input}  onChangeText={(texto)=>this.setState({usuario: texto})}></TextInput>
-      <Text style={estilos.texto} >{"Senha:"}</Text>
-      <TextInput style={estilos.input}  onChangeText={(texto)=>this.setState({senha: texto})}></TextInput>
-      <TouchableOpacity style = {estilos.botao} title="Logar" onPress={()=>this.ler()}>
-        <Text> {'Logar'}</Text>
-      </TouchableOpacity>
-      <Text style = {estilos.ntuca}>{'Não tem uma conta ainda?'}</Text>
-      <TouchableOpacity style = {estilos.botao2}>
-        <Text style = {estilos.textobt}> {'Clique aqui'} </Text>
-      </TouchableOpacity>
-    </View>
-    )
-  }
-
-  ler(){
+  ler() {
     const email = this.state.usuario.toLowerCase();
     const password = this.state.senha.toLowerCase();
 
     firebase.auth()
-    .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         Alert.alert("Logado!!!", "Login realizado com sucesso!");
         this.props.navigation.navigate("PaginaLogado", { email: this.state.usuario });
@@ -167,25 +154,63 @@ class Principal extends React.Component{
           console.log("Formato do email invalido");
           alert("Formato do email invalido");
         } else {
-            console.log("Erro Desconhecido");
-            alert("Ocorreu um erro");
+          console.log("Erro Desconhecido");
+          alert("Ocorreu um erro");
         }
       });
+  }
+
+  render() {
+    return (
+      <View style={estilos.container}>
+        <Text style={estilos.titulo}>{'Crypto Tracker'}</Text>
+        <Image style = {estilos.imagem}source = {require('./assets/bitcoin.png')}></Image>
+        <Text style={estilos.texto}>{"Usuário:"}</Text>
+        <TextInput 
+          style={estilos.input} 
+          onChangeText={(texto) => this.setState({ usuario: texto })} 
+        />
+        <Text style={estilos.texto}>{"Senha:"}</Text>
+        <TextInput 
+          style={estilos.input} 
+          secureTextEntry={true} 
+          onChangeText={(texto) => this.setState({ senha: texto })} 
+        />
+        <TouchableOpacity style={estilos.botao} onPress={() => this.ler()}>
+          <Text>{'Logar'}</Text>
+        </TouchableOpacity>
+        <Text style={estilos.ntuca}>{'Não tem uma conta ainda?'}</Text>
+        <TouchableOpacity 
+          style={estilos.botao2} 
+          onPress={() => this.props.navigation.navigate('Cadastro')}>
+          <Text style={estilos.textobt}>{'Clique aqui'}</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 }
 
 const estilos = StyleSheet.create({
   container: {
     backgroundColor: '#262626',
-    flex : 1,
-    justifyContent: 'center'
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: 0, 
+  },
+  titulo: {
+    color: 'white',
+    fontSize: 36,
+    alignSelf: "center",
+    marginBottom: 20, 
+    fontFamily: 'roboto',
+    fontWeight: 'bold',
   },
   texto: {
     color: "white",
     fontSize: 20,
     alignSelf: "center",
     fontWeight: 'bold',
-    alignItems: 'left'
+    fontFamily: 'Open Sans',
   },
   input: {
     height: 50,
@@ -195,10 +220,9 @@ const estilos = StyleSheet.create({
     borderWidth: 1,
     margin: 10,
     borderRadius: 8,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   botao: {
-    // color: '#000000',
     alignItems: 'center',
     backgroundColor: 'white',
     padding: 10,
@@ -206,27 +230,26 @@ const estilos = StyleSheet.create({
     borderColor: "white",
     borderWidth: 2,
     margin: 10,
-    borderRadius:50,
-    
+    borderRadius: 50,
   },
   ntuca: {
     color: 'white',
     alignSelf: "center",
-    
   },
   botao2: {
     alignItems: 'center',
-    color: 'white',
     backgroundColor: 'white',
     padding: 10,
     borderWidth: 2,
     margin: 10,
-    borderRadius:50,
+    borderRadius: 50,
   },
   textobt: {
-    color: 'blue'
-    
+    color: 'blue',
   },
-  
+  imagem: {
+    alignSelf: 'center',
+    
+  }
 });
 
