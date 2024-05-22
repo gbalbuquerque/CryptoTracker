@@ -73,6 +73,8 @@ const estilos = StyleSheet.create({
     color: "white",
     marginTop: 11,
     paddingTop: 10, 
+    fontFamily: 'roboto',
+    fontWeight: 'bold',
   },
   lista: {
     width: "80%",
