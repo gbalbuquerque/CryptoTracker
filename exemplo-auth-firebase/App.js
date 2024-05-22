@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { Text,View,Button, TextInput, Alert, StyleSheet,TouchableOpacity } from 'react-native';
+import { Text,View,Button, TextInput, Alert, StyleSheet,TouchableOpacity,Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import PaginaLogado from './components/PaginaLogado'
 import firebase from './config/config'
-
 
 const Navegacao1 = createBottomTabNavigator();
 
@@ -18,11 +17,13 @@ export default class App extends React.Component {
         <Navegacao2.Navigator >
           <Navegacao2.Screen name="Login" component={NavTab} 
             options={{
-              headerShown: false
-            }}/>
+              headerShown: false,
+              
+            }}
+            />
           <Navegacao2.Screen name="PaginaLogado" component={PaginaLogado} 
           options={{
-              headerShown: false
+              headerShown: false 
             }}
           />
        </Navegacao2.Navigator>
@@ -36,14 +37,15 @@ const Navegacao2 = createStackNavigator();
 class NavTab extends React.Component {
   render() {
     return (
-        <Navegacao1.Navigator >
+        <Navegacao1.Navigator screenOptions={{ headerShown: false }} >
           <Navegacao1.Screen
             name="Login"
             component={Principal} //o componente é a próxima estrutura de navegação
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons name="home" color={color} size={size} />
-              )
+              ), 
+              //tabBarStyle: { display: 'none' }
             }}
           />
           <Navegacao1.Screen
@@ -104,13 +106,19 @@ class Cadastro extends React.Component{
 
   render(){
     return(
-    <View style = {estilos.fundo}>
+     
+    <View style = {estilos.container}>
+      <Text style ={estilos.titulo}>{'Crypto Tracker'}</Text>
       <Text style={estilos.texto}>{"Cadastrar Usuário:"}</Text>
       <TextInput style={estilos.input} onChangeText={(texto)=>this.setState({user: texto})}></TextInput>
       <Text style={estilos.texto}>{"Cadastrar Senha:"}</Text>
       <TextInput style={estilos.input} onChangeText={(texto)=>this.setState({password: texto})}></TextInput>
-      <Button title="Cadastrar" onPress={()=>this.gravar()}/>
+      <TouchableOpacity style = {estilos.botao} title="Logar" onPress={()=>this.ler()}>
+        <Text> {'Cadastrar'}</Text>
+      </TouchableOpacity>
+      
     </View>
+    
     )
   }
 }
@@ -126,13 +134,18 @@ class Principal extends React.Component{
 
   render(){
     return(
-    <View style = {estilos.fundo}>
+    <View style = {estilos.container}>
+      <Image>  </Image>
       <Text style={estilos.texto} >{"Usuário:"}</Text>
       <TextInput style={estilos.input}  onChangeText={(texto)=>this.setState({usuario: texto})}></TextInput>
       <Text style={estilos.texto} >{"Senha:"}</Text>
       <TextInput style={estilos.input}  onChangeText={(texto)=>this.setState({senha: texto})}></TextInput>
       <TouchableOpacity style = {estilos.botao} title="Logar" onPress={()=>this.ler()}>
         <Text> {'Logar'}</Text>
+      </TouchableOpacity>
+      <Text style = {estilos.ntuca}>{'Não tem uma conta ainda?'}</Text>
+      <TouchableOpacity style = {estilos.botao2}>
+        <Text style = {estilos.textobt}> {'Clique aqui'} </Text>
       </TouchableOpacity>
     </View>
     )
@@ -162,16 +175,17 @@ class Principal extends React.Component{
 }
 
 const estilos = StyleSheet.create({
-  fundo: {
+  container: {
     backgroundColor: '#262626',
     flex : 1,
     justifyContent: 'center'
   },
   texto: {
     color: "white",
-    fontSize: 30,
+    fontSize: 20,
     alignSelf: "center",
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    alignItems: 'left'
   },
   input: {
     height: 50,
@@ -194,6 +208,25 @@ const estilos = StyleSheet.create({
     margin: 10,
     borderRadius:50,
     
-  }
+  },
+  ntuca: {
+    color: 'white',
+    alignSelf: "center",
+    
+  },
+  botao2: {
+    alignItems: 'center',
+    color: 'white',
+    backgroundColor: 'white',
+    padding: 10,
+    borderWidth: 2,
+    margin: 10,
+    borderRadius:50,
+  },
+  textobt: {
+    color: 'blue'
+    
+  },
+  
 });
 
