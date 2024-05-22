@@ -62,6 +62,9 @@ O aplicativo consiste em uma busca refinada e atualizada do preço das cripto mo
 4. Clique no botão "Logar".
 
 ![image](https://github.com/gbalbuquerque/AppReact/assets/115583227/09a53cc8-d175-4053-9c08-9bcaa8f48aa5)
+<br>
+<br>
+<br>
 ![image](https://github.com/gbalbuquerque/AppReact/assets/115583227/60dfdbde-f905-4d64-a97b-bce47e510764)
 
 
