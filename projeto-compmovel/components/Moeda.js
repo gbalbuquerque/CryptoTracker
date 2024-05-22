@@ -2,22 +2,22 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 
 const Moeda = ({ coin }) => (
-  <View style={styles.containerItem}>
-    <View style={styles.coinName}>
-      <Image source={{ uri: coin.image }} style={styles.image} />
-      <View style={styles.containerNames}>
-        <Text style={styles.text}>{coin.name}</Text>
-        <Text style={styles.textSymbol}>{coin.symbol}</Text>
+  <View style={estilos.containerItem}>
+    <View style={estilos.coinName}>
+      <Image source={{ uri: coin.image }} style={estilos.image} />
+      <View style={estilos.containerNames}>
+        <Text style={estilos.text}>{coin.name}</Text>
+        <Text style={estilos.textSymbol}>{coin.symbol}</Text>
       </View>
     </View>
     <View>
-      <Text style={styles.textPrice}>${coin.current_price}</Text>
+      <Text style={estilos.textPrice}>${coin.current_price}</Text>
       <Text
         style={[
-          styles.pricePercentage,
+          estilos.pricePercentage,
           coin.price_change_percentage_24h > 0
-            ? styles.priceUp
-            : styles.priceDown,
+            ? estilos.priceUp
+            : estilos.priceDown,
         ]}
       >
         {coin.price_change_percentage_24h.toFixed(2)}%
@@ -26,7 +26,7 @@ const Moeda = ({ coin }) => (
   </View>
 );
 
-const styles = StyleSheet.create({
+const estilos = StyleSheet.create({
   containerItem: {
     backgroundColor: "#121212",
     paddingTop: 10,

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {View,Text,StyleSheet,StatusBar,FlatList,TextInput,} from "react-native";
+import {View,Text,StyleSheet,StatusBar,FlatList,TextInput,TouchableOpacity,} from "react-native";
 
 import Moeda from "./Moeda.js";
 
-const PaginaLogado = () => {
+const CoinGekko = () => {
   const [coins, setCoins] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [search, setSearch] = useState("");
@@ -21,13 +21,13 @@ const PaginaLogado = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={estilos.container}>
       <StatusBar backgroundColor="#141414" />
 
-      <View style={styles.header}>
-        <Text style={styles.titulo}>{'CryptoTracker'}</Text>
+      <View style={estilos.header}>
+        <Text style={estilos.titulo}>{'CryptoTracker'}</Text>
         <TextInput
-          style={styles.input}
+          style={estilos.input}
           placeholder="Procure uma moeda"
           placeholderTextColor="#858585"
           onChangeText={(text) => text && setSearch(text)}
@@ -35,7 +35,7 @@ const PaginaLogado = () => {
       </View>
 
       <FlatList
-        style={styles.lista}
+        style={estilos.lista}
         data={coins.filter(
           (coin) =>
             coin.name.toLowerCase().includes(search.toLocaleLowerCase()) ||
@@ -54,22 +54,25 @@ const PaginaLogado = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const estilos = StyleSheet.create({
   container: {
     backgroundColor: "#121212",
     flex: 1,
     alignItems: "center",
+    
   },
   header: {
     flexDirection: "row",
     width: "90%",
     justifyContent: "space-between",
     marginBottom: 8,
+    paddingTop: 10, 
   },
   titulo: {
     fontSize: 21,
     color: "white",
     marginTop: 11,
+    paddingTop: 10, 
   },
   lista: {
     width: "80%",
@@ -78,9 +81,11 @@ const styles = StyleSheet.create({
     color: "white",
     borderBottomColor: "#4657CE",
     borderBottomWidth: 1,
-    width: "30%",
+    width: "50%",
     textAlign: "center",
+    paddingTop: 10, 
+    
   },
 });
 
-export default PaginaLogado;
+export default CoinGekko;

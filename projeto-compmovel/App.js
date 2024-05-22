@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Text, View, TextInput, Alert, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TextInput, Alert, StyleSheet, TouchableOpacity, Image,FlatList,StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import PaginaLogado from './components/PaginaLogado';
 import firebase from './config/config';
+import Moeda from "./components/Moeda";
+import CoinGekko from "./components/CoinGekko";
+import FAQ from "./components/Faq";
 
 const Navegacao1 = createBottomTabNavigator();
 
@@ -20,16 +23,31 @@ export default class App extends React.Component {
             name="Login" 
             component={NavTab} 
             options={{
-              headerShown: false,
+            headerShown: false,
             }} 
           />
           <Navegacao2.Screen 
             name="PaginaLogado" 
             component={PaginaLogado} 
             options={{
-              headerShown: false,
+            headerShown: false,
             }} 
           />
+           <Navegacao2.Screen 
+            name="CoinGekko" 
+            component={CoinGekko} 
+            options={{
+            headerShown: false,
+            }} 
+          />
+           <Navegacao2.Screen 
+            name="FAQ" 
+            component={FAQ} 
+            options={{
+            headerShown: false,
+            }} 
+          />
+          
         </Navegacao2.Navigator>
       </NavigationContainer>
     );
@@ -134,6 +152,7 @@ class Cadastro extends React.Component {
     );
   }
 }
+
 
 class Principal extends React.Component {
   constructor(props) {
